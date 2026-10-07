@@ -89,9 +89,9 @@ SPOT_QUOTA_NAME="All ${QLABEL} Spot Instance Requests"
 quota_lookup() {  # $1=region $2=quota name -> "value code"
     local r="$1" name="$2" hit
     for api in list-service-quotas list-aws-default-service-quotas; do
-        hit=$(aws service-quotas "$api" --region "$r" --service-code ec2 \
+        hit=$(retry 4 5 aws service-quotas "$api" --region "$r" --service-code ec2 \
             --query "Quotas[?QuotaName=='${name}'].[Value,QuotaCode]" --output text 2>/dev/null \
-            | awk 'NF == 2 && $1 != "None" { print; exit }')
+            | awk 'NF == 2 && $1 != "None" && !seen++ { print }') || true
         [ -n "$hit" ] && { echo "$hit"; return; }
     done
     echo "None None"
