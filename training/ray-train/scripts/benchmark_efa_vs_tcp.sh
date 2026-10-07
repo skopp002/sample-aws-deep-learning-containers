@@ -45,7 +45,7 @@ run_pass() {
     set +e
     kubectl exec "$head_pod" -n "$NAMESPACE" -c ray-head -- \
         ray job submit --address http://localhost:8265 --working-dir "$REMOTE_CODE_DIR" \
-        --runtime-env-json "{\"pip\": [\"transformers==4.46.3\"], \"env_vars\": ${env_vars}}" -- \
+        --runtime-env-json "{\"env_vars\": ${env_vars}}" -- \
         python3 train.py \
             --model_id "$MODEL_ID" --steps "$BENCH_STEPS" --warmup_steps "$BENCH_WARMUP_STEPS" \
             --seq_len "$SEQ_LEN" --batch_size "$BATCH_SIZE" \

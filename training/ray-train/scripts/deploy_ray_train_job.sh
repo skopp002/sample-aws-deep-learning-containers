@@ -130,8 +130,7 @@ echo "FSDP shards $MODEL_ID's parameters, gradients, and optimizer state across 
 echo "any all-gather/reduce-scatter between a rank on one node and a rank on the other crosses over EFA."
 set +e
 kubectl exec "$HEAD_POD" -n "$NAMESPACE" -c ray-head -- \
-    ray job submit --address http://localhost:8265 --working-dir "$REMOTE_CODE_DIR" \
-    --runtime-env-json '{"pip": ["transformers==4.46.3"]}' -- \
+    ray job submit --address http://localhost:8265 --working-dir "$REMOTE_CODE_DIR" -- \
     python3 train.py \
         --model_id "$MODEL_ID" \
         --steps "$STEPS" \

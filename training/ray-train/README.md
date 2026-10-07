@@ -291,8 +291,7 @@ Running, copies `code/` onto the head pod, then runs:
 
 ```bash
 kubectl exec <head-pod> -n ray-train -c ray-head -- \
-    ray job submit --address http://localhost:8265 --working-dir /tmp/ray-train-code \
-    --runtime-env-json '{"pip": ["transformers==4.46.3"]}' -- \
+    ray job submit --address http://localhost:8265 --working-dir /tmp/ray-train-code -- \
     python3 train.py --model_id Qwen/Qwen2.5-1.5B --steps 5 --seq_len 128 \
         --batch_size 1 --learning_rate 0.00002 --num_workers 0
 ```
