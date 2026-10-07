@@ -38,7 +38,7 @@ export GPU_AZ=${GPU_AZ:-""}
 
 # Public DLC image: no ECR auth needed. Ray Train, PyTorch, and the EFA stack
 # (libfabric, aws-ofi-nccl) all ship in the image.
-export DLC_IMAGE=${DLC_IMAGE:-"public.ecr.aws/deep-learning-containers/ray:train-ml-cuda"}
+export DLC_IMAGE=${DLC_IMAGE:-"public.ecr.aws/deep-learning-containers/ray:train-ml-cuda-v1.1"}
 
 export KUBERAY_VERSION=${KUBERAY_VERSION:-"1.4.0"}
 # Must match the Ray version installed in DLC_IMAGE.

@@ -113,7 +113,7 @@ shell or AWS CLI profile has.
 | GPU_NODEGROUP_NAME | gpu-workers | Name of the GPU node group |
 | GPU_AZ | _(auto)_ | AZ for the GPU node group. Auto-picked from AZs that both offer `GPU_NODE_TYPE` *and* already have a cluster private subnet; if set explicitly, validated against that same intersection and rejected with a reason otherwise |
 | ASSUME_YES | _(empty)_ | Set to `1` to skip the "Proceed? (y/N)" prompt in `deploy_cluster.sh`/`deploy_node_group.sh`. Set by `deploy_all.sh` (and by `find_gpu_capacity.sh` when you accept its deploy offer) after their own single prompt -- not something you normally set by hand |
-| DLC_IMAGE | public.ecr.aws/deep-learning-containers/ray:train-ml-cuda | Ray Train DLC image |
+| DLC_IMAGE | public.ecr.aws/deep-learning-containers/ray:train-ml-cuda-v1.1 | Ray Train DLC image |
 | KUBERAY_VERSION | 1.4.0 | KubeRay operator version |
 | RAY_VERSION | 2.58.0 | Ray version (must match the image) |
 | NVIDIA_DEVICE_PLUGIN_VERSION | 0.20.0 | NVIDIA device plugin Helm chart version |
