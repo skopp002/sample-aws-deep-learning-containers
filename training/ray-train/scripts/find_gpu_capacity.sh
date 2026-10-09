@@ -133,6 +133,7 @@ VCPU=""; EFA=""
 QUOTA_HINTS=""
 
 for R in $REGIONS; do
+    echo "  checking ${R}..." >&2
     AZS=$(aws ec2 describe-instance-type-offerings --region "$R" --location-type availability-zone \
           --filters "Name=instance-type,Values=${TYPE}" --query 'InstanceTypeOfferings[].Location' \
           --output text 2>/dev/null | tr '\t' '\n' | sort || true)
@@ -223,6 +224,7 @@ for R in $REGIONS; do
         elif $PROBE; then
             RESULT="skipped (quota)"
         fi
+        $PROBE && echo "    ${AZ}: ${RESULT}" >&2
         ROWS+="$R|$AZ|$QUOTA_OK|$SPOT|$SUBNET|$RESULT"$'\n'
     done
 done
