@@ -111,6 +111,7 @@ shell or AWS CLI profile has.
 | GPU_NODE_COUNT | 2 | Number of GPU worker nodes |
 | GPUS_PER_NODE | 4 | GPUs per `GPU_NODE_TYPE` -- must match the instance type if you change it |
 | GPU_NODEGROUP_NAME | gpu-workers | Name of the GPU node group |
+| CAPACITY_RESERVATION_ID | _(empty)_ | An existing On-Demand Capacity Reservation to launch the GPU nodes into, e.g. `cr-0123456789abcdef0`. The node group targets it, its AZ is used, and the capacity search is skipped. Validated for state, instance type and available count; `REGION` must be the reservation's Region |
 | GPU_AZ | _(auto)_ | AZ for the GPU node group. Auto-picked from AZs that both offer `GPU_NODE_TYPE` *and* already have a cluster private subnet; if set explicitly, validated against that same intersection and rejected with a reason otherwise |
 | ASSUME_YES | _(empty)_ | Set to `1` to skip the "Proceed? (y/N)" prompt in `deploy_cluster.sh`/`deploy_node_group.sh`. Set by `deploy_all.sh` (and by `find_gpu_capacity.sh` when you accept its deploy offer) after their own single prompt -- not something you normally set by hand |
 | DLC_IMAGE | public.ecr.aws/deep-learning-containers/ray:train-ml-cuda-v1.1 | Ray Train DLC image |

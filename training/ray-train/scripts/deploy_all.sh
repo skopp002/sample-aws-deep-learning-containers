@@ -128,7 +128,9 @@ echo "  Deploy infrastructure: multi-node Ray Train on EKS"
 echo "=================================================="
 echo -e "${NC}"
 echo "  GPU nodes:    ${GPU_NODE_COUNT} x ${GPU_NODE_TYPE}"
-if [ -n "$CALLER_GPU_AZ" ]; then
+if [ -n "$CAPACITY_RESERVATION_ID" ]; then
+    echo "  Placement:    ${REGION}, from capacity reservation ${CAPACITY_RESERVATION_ID} (no search)"
+elif [ -n "$CALLER_GPU_AZ" ]; then
     echo "  Placement:    ${REGION} / ${CALLER_GPU_AZ} (set by you, no search)"
 else
     echo "  Search:       $($ALL_REGIONS && echo "all enabled Regions" || echo "$REGIONS")"
@@ -157,7 +159,10 @@ fi
 # ------------------------------------------------------------------ placement
 CANDIDATES=""
 SOURCE=""
-if [ -n "$CALLER_GPU_AZ" ]; then
+if [ -n "$CAPACITY_RESERVATION_ID" ]; then
+    CANDIDATES=$(resolve_capacity_reservation "$CAPACITY_RESERVATION_ID")
+    SOURCE="capacity reservation $CAPACITY_RESERVATION_ID"
+elif [ -n "$CALLER_GPU_AZ" ]; then
     CANDIDATES="$CALLER_GPU_AZ"
     SOURCE="GPU_AZ set by you"
 elif [ -n "$AZ_LIST" ]; then

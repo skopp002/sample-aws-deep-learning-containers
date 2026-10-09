@@ -36,6 +36,10 @@ export GPUS_PER_NODE=${GPUS_PER_NODE:-4}
 export GPU_NODEGROUP_NAME=${GPU_NODEGROUP_NAME:-"gpu-workers"}
 export GPU_AZ=${GPU_AZ:-""}
 
+# An existing On-Demand Capacity Reservation to launch the GPU nodes into.
+# When set, its AZ is used and the capacity search is skipped.
+export CAPACITY_RESERVATION_ID=${CAPACITY_RESERVATION_ID:-""}
+
 # Public DLC image: no ECR auth needed. Ray Train, PyTorch, and the EFA stack
 # (libfabric, aws-ofi-nccl) all ship in the image.
 export DLC_IMAGE=${DLC_IMAGE:-"public.ecr.aws/deep-learning-containers/ray:train-ml-cuda-v1.1"}
