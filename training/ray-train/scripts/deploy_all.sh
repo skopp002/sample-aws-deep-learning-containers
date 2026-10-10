@@ -91,6 +91,7 @@ save_placement() {
 # Written by deploy_all.sh on $(date -u +%Y-%m-%dT%H:%M:%SZ). Loaded by env.sh so the
 # other scripts target the same place. Values you export yourself still win.
 # Delete this file to go back to the defaults in env.sh.
+export CLUSTER_NAME="\${CLUSTER_NAME:-${CLUSTER_NAME}}"
 export REGION="\${REGION:-${REGION}}"
 export GPU_AZ="\${GPU_AZ:-${GPU_AZ:-}}"
 EOF
