@@ -101,6 +101,7 @@ def train_func(config):
         parallel_strategy_kwargs={"auto_wrap_policy": auto_wrap_policy},
     )
 
+    model.train()
     optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
     torch.cuda.reset_peak_memory_stats(device)
 
